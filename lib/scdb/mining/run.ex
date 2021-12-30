@@ -22,6 +22,6 @@ defmodule Scdb.Mining.Run do
   def changeset(run, attrs) do
     run
     |> cast(attrs, [:location, :refinery, :cscu, :refinery_cost, :sell_price, :captain, :miners, :run_time, :refining_time, :sold, :paid_out])
-    |> validate_required([:location, :refinery, :cscu, :refinery_cost, :sell_price, :captain, :miners, :run_time, :refining_time, :sold, :paid_out])
+    |> validate_required([:location, :refinery, :cscu, :refinery_cost, :sell_price, :captain, :run_time, :refining_time, :sold, :paid_out])
   end
 end
