@@ -8,7 +8,7 @@ defmodule Scdb.Mining.Run do
     field :location, :string
     field :miners, {:array, :string}
     field :paid_out, :boolean, default: false
-    field :refinery, Ecto.Enum, values: [:test_refinery]
+    field :refinery, Ecto.Enum, values: [:"ARC-L1", :"CRU-L1", :"HUR-L1", :"HUR-L2", :"MIC-L1"]
     field :refinery_cost, :integer
     field :refining_time, :string
     field :run_time, :integer

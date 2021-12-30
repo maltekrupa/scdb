@@ -21,7 +21,7 @@ defmodule Scdb.MiningTest do
     end
 
     test "create_run/1 with valid data creates a run" do
-      valid_attrs = %{captain: "some captain", cscu: 42, location: "some location", miners: [], paid_out: true, refinery: :test_refinery, refinery_cost: 42, refining_time: "some refining_time", run_time: 42, sell_price: 42, sold: true}
+      valid_attrs = %{captain: "some captain", cscu: 42, location: "some location", miners: [], paid_out: true, refinery: :"ARC-L1", refinery_cost: 42, refining_time: "some refining_time", run_time: 42, sell_price: 42, sold: true}
 
       assert {:ok, %Run{} = run} = Mining.create_run(valid_attrs)
       assert run.captain == "some captain"
@@ -29,7 +29,7 @@ defmodule Scdb.MiningTest do
       assert run.location == "some location"
       assert run.miners == []
       assert run.paid_out == true
-      assert run.refinery == :test_refinery
+      assert run.refinery == :"ARC-L1"
       assert run.refinery_cost == 42
       assert run.refining_time == "some refining_time"
       assert run.run_time == 42
@@ -43,7 +43,7 @@ defmodule Scdb.MiningTest do
 
     test "update_run/2 with valid data updates the run" do
       run = run_fixture()
-      update_attrs = %{captain: "some updated captain", cscu: 43, location: "some updated location", miners: [], paid_out: false, refinery: :test_refinery, refinery_cost: 43, refining_time: "some updated refining_time", run_time: 43, sell_price: 43, sold: false}
+      update_attrs = %{captain: "some updated captain", cscu: 43, location: "some updated location", miners: [], paid_out: false, refinery: :"ARC-L1", refinery_cost: 43, refining_time: "some updated refining_time", run_time: 43, sell_price: 43, sold: false}
 
       assert {:ok, %Run{} = run} = Mining.update_run(run, update_attrs)
       assert run.captain == "some updated captain"
@@ -51,7 +51,7 @@ defmodule Scdb.MiningTest do
       assert run.location == "some updated location"
       assert run.miners == []
       assert run.paid_out == false
-      assert run.refinery == :test_refinery
+      assert run.refinery == :"ARC-L1"
       assert run.refinery_cost == 43
       assert run.refining_time == "some updated refining_time"
       assert run.run_time == 43

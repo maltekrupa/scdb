@@ -16,7 +16,7 @@ defmodule Scdb.MiningFixtures do
         location: "some location",
         miners: [],
         paid_out: true,
-        refinery: :test_refinery,
+        refinery: :"ARC-L1",
         refinery_cost: 42,
         refining_time: "some refining_time",
         run_time: 42,
