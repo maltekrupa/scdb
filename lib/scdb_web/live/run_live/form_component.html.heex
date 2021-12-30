@@ -10,7 +10,7 @@
     phx-submit="save">
   
     <%= label f, :location %>
-    <%= select f, :location, Ecto.Enum.values(Scdb.Mining.Run, :location), prompt: "Choose a value" %>
+    <%= text_input f, :location %>
     <%= error_tag f, :location %>
   
     <%= label f, :refinery %>

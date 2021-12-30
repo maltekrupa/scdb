@@ -13,7 +13,7 @@ defmodule Scdb.MiningFixtures do
       |> Enum.into(%{
         captain: "some captain",
         cscu: 42,
-        location: :test_location,
+        location: "some location",
         miners: [],
         paid_out: true,
         refinery: :test_refinery,

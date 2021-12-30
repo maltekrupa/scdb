@@ -5,7 +5,7 @@ defmodule Scdb.Mining.Run do
   schema "runs" do
     field :captain, :string
     field :cscu, :integer
-    field :location, Ecto.Enum, values: [:test_location]
+    field :location, :string
     field :miners, {:array, :string}
     field :paid_out, :boolean, default: false
     field :refinery, Ecto.Enum, values: [:test_refinery]
