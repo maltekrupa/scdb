@@ -16,6 +16,13 @@ defmodule ScdbWeb.Router do
 
   scope "/", ScdbWeb do
     pipe_through :browser
+
+    live "/", RunLive.Index, :index
+    live "/new", RunLive.Index, :new
+    live "/:id/edit", RunLive.Index, :edit
+
+    live "/:id", RunLive.Show, :show
+    live "/:id/show/edit", RunLive.Show, :edit
   end
 
   # Other scopes may use custom stacks.

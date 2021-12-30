@@ -1,0 +1,60 @@
+<div>
+  <h2><%= @title %></h2>
+
+  <.form
+    let={f}
+    for={@changeset}
+    id="run-form"
+    phx-target={@myself}
+    phx-change="validate"
+    phx-submit="save">
+  
+    <%= label f, :location %>
+    <%= select f, :location, Ecto.Enum.values(Scdb.Mining.Run, :location), prompt: "Choose a value" %>
+    <%= error_tag f, :location %>
+  
+    <%= label f, :refinery %>
+    <%= select f, :refinery, Ecto.Enum.values(Scdb.Mining.Run, :refinery), prompt: "Choose a value" %>
+    <%= error_tag f, :refinery %>
+  
+    <%= label f, :cscu %>
+    <%= number_input f, :cscu %>
+    <%= error_tag f, :cscu %>
+  
+    <%= label f, :refinery_cost %>
+    <%= number_input f, :refinery_cost %>
+    <%= error_tag f, :refinery_cost %>
+  
+    <%= label f, :sell_price %>
+    <%= number_input f, :sell_price %>
+    <%= error_tag f, :sell_price %>
+  
+    <%= label f, :captain %>
+    <%= text_input f, :captain %>
+    <%= error_tag f, :captain %>
+  
+    <%= label f, :miners %>
+    <%= multiple_select f, :miners, ["Option 1": "option1", "Option 2": "option2"] %>
+    <%= error_tag f, :miners %>
+  
+    <%= label f, :run_time %>
+    <%= number_input f, :run_time %>
+    <%= error_tag f, :run_time %>
+  
+    <%= label f, :refining_time %>
+    <%= text_input f, :refining_time %>
+    <%= error_tag f, :refining_time %>
+  
+    <%= label f, :sold %>
+    <%= checkbox f, :sold %>
+    <%= error_tag f, :sold %>
+  
+    <%= label f, :paid_out %>
+    <%= checkbox f, :paid_out %>
+    <%= error_tag f, :paid_out %>
+  
+    <div>
+      <%= submit "Save", phx_disable_with: "Saving..." %>
+    </div>
+  </.form>
+</div>

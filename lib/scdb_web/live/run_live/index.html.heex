@@ -1,0 +1,59 @@
+<h1>Listing Runs</h1>
+
+<%= if @live_action in [:new, :edit] do %>
+  <.modal return_to={Routes.run_index_path(@socket, :index)}>
+    <.live_component
+      module={ScdbWeb.RunLive.FormComponent}
+      id={@run.id || :new}
+      title={@page_title}
+      action={@live_action}
+      run={@run}
+      return_to={Routes.run_index_path(@socket, :index)}
+    />
+  </.modal>
+<% end %>
+
+<table>
+  <thead>
+    <tr>
+      <th>Location</th>
+      <th>Refinery</th>
+      <th>Cscu</th>
+      <th>Refinery cost</th>
+      <th>Sell price</th>
+      <th>Captain</th>
+      <th>Miners</th>
+      <th>Run time</th>
+      <th>Refining time</th>
+      <th>Sold</th>
+      <th>Paid out</th>
+
+      <th></th>
+    </tr>
+  </thead>
+  <tbody id="runs">
+    <%= for run <- @runs do %>
+      <tr id={"run-#{run.id}"}>
+        <td><%= run.location %></td>
+        <td><%= run.refinery %></td>
+        <td><%= run.cscu %></td>
+        <td><%= run.refinery_cost %></td>
+        <td><%= run.sell_price %></td>
+        <td><%= run.captain %></td>
+        <td><%= run.miners %></td>
+        <td><%= run.run_time %></td>
+        <td><%= run.refining_time %></td>
+        <td><%= run.sold %></td>
+        <td><%= run.paid_out %></td>
+
+        <td>
+          <span><%= live_redirect "Show", to: Routes.run_show_path(@socket, :show, run) %></span>
+          <span><%= live_patch "Edit", to: Routes.run_index_path(@socket, :edit, run) %></span>
+          <span><%= link "Delete", to: "#", phx_click: "delete", phx_value_id: run.id, data: [confirm: "Are you sure?"] %></span>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<span><%= live_patch "New Run", to: Routes.run_index_path(@socket, :new) %></span>
