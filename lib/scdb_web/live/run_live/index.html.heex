@@ -42,7 +42,7 @@
         <td><%= run.refinery_cost %></td>
         <td><%= run.sell_price %></td>
         <td><%= run.captain %></td>
-        <td><%= run.miners %></td>
+        <td><%= Enum.join(run.miners || [], ", ") %></td>
         <td><%= run.run_time %></td>
         <td><%= run.refining_time %></td>
         <td><%= run.sold %></td>
