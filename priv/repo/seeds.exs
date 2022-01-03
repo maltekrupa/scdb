@@ -10,12 +10,7 @@
 # We recommend using the bang functions (`insert!`, `update!`
 # and so on) as they will fail if something goes wrong.
 
-miners = [
-  "Huey",
-  "Dewey",
-  "Louie",
-]
-
+miners = ["Huey", "Dewey", "Louie"]
 locations = [
   "Humboldt Mines",
   "Loveridge Mineral Reserve",
@@ -39,7 +34,7 @@ for _n <- 1..20 do
   # random captain and crew
   [captain | miners ] = Enum.shuffle(miners)
 
-  Scdb.Repo.insert!(%Scdb.Mining.Run{
+  attrs = %{
     location: Enum.random(locations),
     refinery: Enum.random(Ecto.Enum.values(Scdb.Mining.Run, :refinery)),
     cscu: Enum.random(0..3072),
@@ -51,5 +46,12 @@ for _n <- 1..20 do
     paid_out: Enum.random([true, false]),
     captain: captain,
     miners: miners,
-  })
+  }
+
+  # We have computed fields in the schema which is why we should
+  # use this way to generate new entries.
+  # Using Repo.insert! will leave them empty.
+  %Scdb.Mining.Run{}
+  |> Scdb.Mining.Run.changeset(attrs)
+  |> Scdb.Repo.insert()
 end

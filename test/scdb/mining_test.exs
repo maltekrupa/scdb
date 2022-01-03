@@ -35,6 +35,7 @@ defmodule Scdb.MiningTest do
       assert run.run_time == 42
       assert run.sell_price == 42
       assert run.sold == true
+      assert run.net_worth == run.cscu * run.sell_price - run.refinery_cost
     end
 
     test "create_run/1 with invalid data returns error changeset" do
@@ -57,6 +58,7 @@ defmodule Scdb.MiningTest do
       assert run.run_time == 43
       assert run.sell_price == 43
       assert run.sold == false
+      assert run.net_worth == run.cscu * run.sell_price - run.refinery_cost
     end
 
     test "update_run/2 with invalid data returns error changeset" do
