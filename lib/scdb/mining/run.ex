@@ -15,6 +15,7 @@ defmodule Scdb.Mining.Run do
     field :sell_price, :integer
     field :sold, :boolean, default: false
     field :net_worth, :integer
+    field :equal_payout, :integer
 
     timestamps()
   end
@@ -25,6 +26,7 @@ defmodule Scdb.Mining.Run do
     |> cast(attrs, [:location, :refinery, :cscu, :refinery_cost, :sell_price, :captain, :miners, :run_time, :refining_time, :sold, :paid_out])
     |> validate_required([:location, :refinery, :cscu, :refinery_cost, :sell_price, :captain, :run_time, :refining_time, :sold, :paid_out])
     |> append_net_worth()
+    |> append_equal_payout()
   end
 
   defp append_net_worth(changeset) do
@@ -37,13 +39,21 @@ defmodule Scdb.Mining.Run do
   end
 
   defp calculate_net_worth(run) do
-    # This conditional feels wrong. Why can't the case clause in append_net_worth
-    # not do the same?
-    if Map.has_key?(run, :cscu) && Map.has_key?(run, :sell_price) && Map.has_key?(run, :refinery_cost) do
-      run.cscu * run.sell_price - run.refinery_cost
-    else
-      0
+    Map.get(run, :cscu, 0) * Map.get(run, :sell_price, 0) - Map.get(run, :refinery_cost, 0)
+  end
+
+  defp append_equal_payout(changeset) do
+    case changeset do
+      %Ecto.Changeset{valid?: true, changes: run, errors: []} ->
+        put_change(changeset, :equal_payout, calculate_equal_payout(run))
+      _ ->
+        put_change(changeset, :equal_payout, 0)
     end
   end
+
+  defp calculate_equal_payout(run) do
+    trunc(Map.get(run, :net_worth, 0) / (length(Map.get(run, :miners, [])) + 1))
+  end
+
 
 end
