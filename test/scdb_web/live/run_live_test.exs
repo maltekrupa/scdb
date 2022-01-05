@@ -4,9 +4,45 @@ defmodule ScdbWeb.RunLiveTest do
   import Phoenix.LiveViewTest
   import Scdb.MiningFixtures
 
-  @create_attrs %{captain: "some captain", cscu: 42, location: "some location", miners: [], paid_out: true, refinery: "ARC-L1", refinery_cost: 42, refining_time: "some refining_time", run_time: 42, sell_price: 42, sold: true}
-  @update_attrs %{captain: "some updated captain", cscu: 43, location: "some updated location", miners: [], paid_out: false, refinery: "HUR-L2", refinery_cost: 43, refining_time: "some updated refining_time", run_time: 43, sell_price: 43, sold: false}
-  @invalid_attrs %{captain: nil, cscu: nil, location: nil, miners: [], paid_out: false, refinery: nil, refinery_cost: nil, refining_time: nil, run_time: nil, sell_price: nil, sold: false}
+  @create_attrs %{
+    captain: "some captain",
+    cscu: 42,
+    location: "some location",
+    miners: [],
+    paid_out: true,
+    refinery: "ARC-L1",
+    refinery_cost: 42,
+    refining_time: "some refining_time",
+    run_time: 42,
+    sell_price: 42,
+    sold: true
+  }
+  @update_attrs %{
+    captain: "some updated captain",
+    cscu: 43,
+    location: "some updated location",
+    miners: [],
+    paid_out: false,
+    refinery: "HUR-L2",
+    refinery_cost: 43,
+    refining_time: "some updated refining_time",
+    run_time: 43,
+    sell_price: 43,
+    sold: false
+  }
+  @invalid_attrs %{
+    captain: nil,
+    cscu: nil,
+    location: nil,
+    miners: [],
+    paid_out: false,
+    refinery: nil,
+    refinery_cost: nil,
+    refining_time: nil,
+    run_time: nil,
+    sell_price: nil,
+    sold: false
+  }
 
   defp create_run(_) do
     run = run_fixture()

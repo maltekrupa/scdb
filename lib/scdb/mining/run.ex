@@ -23,8 +23,31 @@ defmodule Scdb.Mining.Run do
   @doc false
   def changeset(run, attrs) do
     run
-    |> cast(attrs, [:location, :refinery, :cscu, :refinery_cost, :sell_price, :captain, :miners, :run_time, :refining_time, :sold, :paid_out])
-    |> validate_required([:location, :refinery, :cscu, :refinery_cost, :sell_price, :captain, :run_time, :refining_time, :sold, :paid_out])
+    |> cast(attrs, [
+      :location,
+      :refinery,
+      :cscu,
+      :refinery_cost,
+      :sell_price,
+      :captain,
+      :miners,
+      :run_time,
+      :refining_time,
+      :sold,
+      :paid_out
+    ])
+    |> validate_required([
+      :location,
+      :refinery,
+      :cscu,
+      :refinery_cost,
+      :sell_price,
+      :captain,
+      :run_time,
+      :refining_time,
+      :sold,
+      :paid_out
+    ])
     |> append_net_worth()
     |> append_equal_payout()
   end
@@ -33,6 +56,7 @@ defmodule Scdb.Mining.Run do
     case changeset do
       %Ecto.Changeset{valid?: true, changes: run, errors: []} ->
         put_change(changeset, :net_worth, calculate_net_worth(run))
+
       _ ->
         put_change(changeset, :net_worth, 0)
     end
@@ -46,6 +70,7 @@ defmodule Scdb.Mining.Run do
     case changeset do
       %Ecto.Changeset{valid?: true, changes: run, errors: []} ->
         put_change(changeset, :equal_payout, calculate_equal_payout(run))
+
       _ ->
         put_change(changeset, :equal_payout, 0)
     end
@@ -54,6 +79,4 @@ defmodule Scdb.Mining.Run do
   defp calculate_equal_payout(run) do
     trunc(Map.get(run, :net_worth, 0) / (length(Map.get(run, :miners, [])) + 1))
   end
-
-
 end

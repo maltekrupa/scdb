@@ -11,6 +11,7 @@
 # and so on) as they will fail if something goes wrong.
 
 miners = ["Huey", "Dewey", "Louie"]
+
 locations = [
   "Humboldt Mines",
   "Loveridge Mineral Reserve",
@@ -27,12 +28,12 @@ locations = [
   "Teddy's Playhouse",
   "The Orphanage",
   "The Pit",
-  "Wheeler's",
+  "Wheeler's"
 ]
 
 for _n <- 1..20 do
   # random captain and crew
-  [captain | miners ] = Enum.shuffle(miners)
+  [captain | miners] = Enum.shuffle(miners)
 
   attrs = %{
     location: Enum.random(locations),
@@ -45,7 +46,7 @@ for _n <- 1..20 do
     sold: Enum.random([true, false]),
     paid_out: Enum.random([true, false]),
     captain: captain,
-    miners: miners,
+    miners: miners
   }
 
   # We have computed fields in the schema which is why we should
