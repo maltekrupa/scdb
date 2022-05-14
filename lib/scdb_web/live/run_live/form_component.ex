@@ -69,6 +69,7 @@ defmodule ScdbWeb.RunLive.FormComponent do
     array =
       run_params["miners"]
       |> String.split([",", " ", "\n"], trim: true)
+
     %{run_params | "miners" => array}
   end
 end
