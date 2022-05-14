@@ -14,6 +14,7 @@ jobs:
         with:
           otp-version: ${{ env.OTP_VERSION }}
           elixir-version: ${{ env.ELIXIR_VERSION }}
+      - run: mix deps.get
       - run: mix format --check-formatted
 
   test:
