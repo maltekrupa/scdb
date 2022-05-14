@@ -34,7 +34,7 @@
     <%= error_tag f, :captain %>
   
     <%= label f, :miners %>
-    <%= multiple_select f, :miners, ["Option 1": "option1", "Option 2": "option2"] %>
+    <%= text_input f, :miners, phx_change: "miners_changed", value: @run.miners || [] |> Enum.join(", ") %>
     <%= error_tag f, :miners %>
   
     <%= label f, :run_time %>
