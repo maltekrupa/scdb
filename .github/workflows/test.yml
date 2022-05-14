@@ -35,6 +35,9 @@ jobs:
           otp-version: ${{ env.OTP_VERSION }}
           elixir-version: ${{ env.ELIXIR_VERSION }}
       - run: mix deps.get
+      - run: mix deps.compile
+        env:
+          MIX_ENV: test
       - run: pg_isready -h localhost -p 5432
       - run: mix test
         env:
