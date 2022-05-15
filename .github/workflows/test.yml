@@ -1,0 +1,44 @@
+name: Test and check format
+on: pull_request
+
+env:
+  OTP_VERSION: 24.3.4
+  ELIXIR_VERSION: 1.13.4
+
+jobs:
+  format:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: erlef/setup-beam@v1
+        with:
+          otp-version: ${{ env.OTP_VERSION }}
+          elixir-version: ${{ env.ELIXIR_VERSION }}
+      - run: mix deps.get
+      - run: mix format --check-formatted
+
+  test:
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+        options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
+        ports:
+          - 5432:5432
+    steps:
+      - uses: actions/checkout@v3
+      - uses: erlef/setup-beam@v1
+        with:
+          otp-version: ${{ env.OTP_VERSION }}
+          elixir-version: ${{ env.ELIXIR_VERSION }}
+      - run: mix deps.get
+      - run: mix deps.compile
+        env:
+          MIX_ENV: test
+      - run: pg_isready -h localhost -p 5432
+      - run: mix test
+        env:
+          DATABASE_URL: postgres://postgres:postgres@localhost:5432/test
